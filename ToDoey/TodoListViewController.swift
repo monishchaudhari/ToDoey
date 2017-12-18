@@ -10,11 +10,18 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
+    let defaults = UserDefaults.standard
+    
    var itemArray = ["Buy Eggs", "Buy Milk", "Buy Chocolate"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if let items = defaults.array(forKey: "todoListAttay") as? [String] {
+            self.itemArray = items
+        }
+        
     }
 
     //MARK - Methods for Display Rows of Table
@@ -59,8 +66,9 @@ class TodoListViewController: UITableViewController {
             //What will happen when user click add item
             print("Success!")
             if textField.text != "" {
-                print(textField.text!)
+                
             self.itemArray.append(textField.text!)
+                self.defaults.set(self.itemArray, forKey: "todoListAttay")
                 self.tableView.reloadData()
             }
         }
