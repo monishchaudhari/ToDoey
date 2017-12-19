@@ -13,6 +13,8 @@ class TodoListViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    @IBOutlet weak var noOfItems: UIBarButtonItem!
+    
     var selectedCategory : Category? {
         didSet{
             loadData()
@@ -26,9 +28,10 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        print("--------------------Into TodoList")
-        // loadData() //calling method
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        navigationItem.title = selectedCategory?.name ?? "Items"
+        updateNoOfItems()
+        
         
     }
     
@@ -72,6 +75,20 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true) //to deselct as soon as we move our finget from row
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            context.delete(itemArray[indexPath.row])
+            itemArray.remove(at: indexPath.row)
+            saveData()
+            updateNoOfItems()
+            
+        }
+    }
     
     //MARK - Add Items to List
     @IBAction func addItemPressed(_ sender: UIBarButtonItem) {
@@ -94,6 +111,7 @@ class TodoListViewController: UITableViewController {
                 
                 self.itemArray.append(newItem) //appending to array
                 self.saveData() //method call
+                
             }
         }
         
@@ -116,6 +134,7 @@ class TodoListViewController: UITableViewController {
         }
         
         tableView.reloadData()
+        updateNoOfItems()
     }
     
     
@@ -137,8 +156,22 @@ class TodoListViewController: UITableViewController {
             print("Error in fetching data: \(error)")
         }
         tableView.reloadData()
+        updateNoOfItems()
         
     }
+    
+    func updateNoOfItems() {
+        
+        let numberofItemsOnPage : Int = itemArray.count
+        
+        if numberofItemsOnPage == 0 {
+            noOfItems.title = "Add Items "
+        }
+        else {
+            noOfItems.title = "\(itemArray.count) "
+        }
+    }
+    
     
 }
 

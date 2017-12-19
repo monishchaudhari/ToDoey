@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,14 +34,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDoey" id="6Cc-Yo-nGg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="64m-vk-ZiE">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addButtonPressed:" destination="KWS-1b-jLJ" id="Yuh-b7-376"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="64m-vk-ZiE">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="KWS-1b-jLJ" id="Yuh-b7-376"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" style="done" id="xit-Lu-qzA">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="noOfItems" destination="xit-Lu-qzA" id="kpE-Jf-Ufz"/>
                         <segue destination="Gc1-1k-60w" kind="show" identifier="goToItems" id="syA-OO-GmP"/>
                     </connections>
                 </tableViewController>
@@ -80,13 +87,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="2tW-F0-MFO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="T5T-LE-kZg">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addItemPressed:" destination="Gc1-1k-60w" id="qGY-Sv-otj"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="T5T-LE-kZg">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addItemPressed:" destination="Gc1-1k-60w" id="qGY-Sv-otj"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" style="done" id="FUf-8Y-eR6">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="noOfItems" destination="FUf-8Y-eR6" id="Ki0-PA-Enw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coT-lt-s9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

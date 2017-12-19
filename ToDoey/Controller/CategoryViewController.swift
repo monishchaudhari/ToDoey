@@ -11,6 +11,7 @@ import CoreData
 
 class CategoryViewController: UITableViewController {
     
+    @IBOutlet weak var noOfItems: UIBarButtonItem!
     var categoryArray = [Category]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -20,6 +21,7 @@ class CategoryViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
        // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadData()
+        updateNoOfItems()
         
     }
     
@@ -37,6 +39,22 @@ class CategoryViewController: UITableViewController {
         
         return cell
         
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            context.delete(categoryArray[indexPath.row])
+            categoryArray.remove(at: indexPath.row)
+            saveData()
+            updateNoOfItems()
+            
+        }
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -76,13 +94,11 @@ class CategoryViewController: UITableViewController {
         //tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "goToItems", sender: self)
-        print("--------------------------Segue Performed")
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! TodoListViewController
-        print("--------------------------Segue altered")
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categoryArray[indexPath.row]
         }
@@ -99,6 +115,7 @@ class CategoryViewController: UITableViewController {
             print("Error in Save Data : \(error)")
         }
         tableView.reloadData()
+        updateNoOfItems()
     }
     
     
@@ -110,5 +127,18 @@ class CategoryViewController: UITableViewController {
         }
         
         tableView.reloadData()
+        updateNoOfItems()
+    }
+    
+    func updateNoOfItems() {
+        
+        let numberofItemsOnPage : Int = categoryArray.count
+        
+        if numberofItemsOnPage == 0 {
+            noOfItems.title = "Add Category "
+        }
+        else {
+            noOfItems.title = "\(categoryArray.count) "
+        }
     }
 }
