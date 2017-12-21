@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,35 +24,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't Forgot Anything" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW0-YV-zuH">
-                                <rect key="frame" x="98" y="323" width="168" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ToDoey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcL-za-g4S">
-                                <rect key="frame" x="109" y="164" width="157" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="50"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="by Monish Chaudhari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yi7-jL-3UR">
-                                <rect key="frame" x="214" y="629" width="145" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiK-Ng-HGm" userLabel="Top">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="323"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDoey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcL-za-g4S">
+                                        <rect key="frame" x="109" y="132.5" width="157" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="NcL-za-g4S" secondAttribute="height" multiplier="157:59" id="Nol-TK-6Ba"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="NcL-za-g4S" firstAttribute="centerY" secondItem="BiK-Ng-HGm" secondAttribute="centerY" id="3hq-MK-isb"/>
+                                    <constraint firstItem="NcL-za-g4S" firstAttribute="centerX" secondItem="BiK-Ng-HGm" secondAttribute="centerX" id="VbF-OL-bj7"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ntt-uA-a7p" userLabel="Middle">
+                                <rect key="frame" x="0.0" y="323" width="375" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't Forgot Anything" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW0-YV-zuH">
+                                        <rect key="frame" x="103" y="0.0" width="168" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="JW0-YV-zuH" secondAttribute="height" multiplier="8:1" id="Mjp-pD-SOO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="JW0-YV-zuH" firstAttribute="centerY" secondItem="ntt-uA-a7p" secondAttribute="centerY" id="L9J-S2-mGg"/>
+                                    <constraint firstAttribute="height" constant="21" id="kBs-XS-zV5"/>
+                                    <constraint firstItem="JW0-YV-zuH" firstAttribute="centerX" secondItem="ntt-uA-a7p" secondAttribute="centerX" id="ldj-kg-kwa"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRC-ux-Ndx" userLabel="Bottum">
+                                <rect key="frame" x="0.0" y="344" width="375" height="323"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Monish Chaudhari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yi7-jL-3UR">
+                                        <rect key="frame" x="222" y="297" width="145" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="yi7-jL-3UR" secondAttribute="height" multiplier="145:18" id="xEb-tu-Kd1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="yi7-jL-3UR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HRC-ux-Ndx" secondAttribute="leading" constant="20" symbolic="YES" id="1pY-Pv-QkQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="yi7-jL-3UR" secondAttribute="bottom" constant="8" id="90u-yi-U2I"/>
+                                    <constraint firstAttribute="trailing" secondItem="yi7-jL-3UR" secondAttribute="trailing" constant="8" id="MDi-hT-Rgz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.25135309389999999" green="0.61989183879999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HRC-ux-Ndx" secondAttribute="trailing" id="2cZ-mN-JwE"/>
+                            <constraint firstAttribute="bottom" secondItem="HRC-ux-Ndx" secondAttribute="bottom" id="9Ln-GZ-8Wq"/>
+                            <constraint firstItem="ntt-uA-a7p" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="9bK-Cg-dUQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ntt-uA-a7p" secondAttribute="trailing" id="LAz-lA-ytr"/>
+                            <constraint firstItem="BiK-Ng-HGm" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SiP-jq-tgh"/>
+                            <constraint firstItem="ntt-uA-a7p" firstAttribute="top" secondItem="BiK-Ng-HGm" secondAttribute="bottom" id="Sqs-pc-yNQ"/>
+                            <constraint firstAttribute="trailing" secondItem="BiK-Ng-HGm" secondAttribute="trailing" id="TcV-5k-AVm"/>
+                            <constraint firstItem="ntt-uA-a7p" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="emx-oo-YqN"/>
+                            <constraint firstItem="BiK-Ng-HGm" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="hj3-39-qlr"/>
+                            <constraint firstItem="HRC-ux-Ndx" firstAttribute="top" secondItem="ntt-uA-a7p" secondAttribute="bottom" id="k53-xh-WUl"/>
+                            <constraint firstItem="HRC-ux-Ndx" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ooL-jL-VeC"/>
+                            <constraint firstItem="ntt-uA-a7p" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pGI-zi-RVC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
 </document>
