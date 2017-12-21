@@ -27,7 +27,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="us7-zz-GEk" userLabel="Table View Cell" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="us7-zz-GEk" userLabel="Table View Cell" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="us7-zz-GEk" id="O0Y-qx-sws">
@@ -40,14 +40,11 @@
                     <navigationItem key="navigationItem" title="ToDoey" id="6Cc-Yo-nGg">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="64m-vk-ZiE">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="addButtonPressed:" destination="KWS-1b-jLJ" id="Yuh-b7-376"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" style="done" id="xit-Lu-qzA">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
+                            <barButtonItem title="Item" style="done" id="xit-Lu-qzA"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -76,7 +73,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoItemCell" id="moo-Cl-o1L">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="moo-Cl-o1L" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="moo-Cl-o1L" id="NR5-dU-Xrc">
@@ -93,14 +90,11 @@
                     <navigationItem key="navigationItem" title="Items" id="2tW-F0-MFO">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="T5T-LE-kZg">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="addItemPressed:" destination="Gc1-1k-60w" id="qGY-Sv-otj"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" style="done" id="FUf-8Y-eR6">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
+                            <barButtonItem title="Item" style="done" id="FUf-8Y-eR6"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -120,7 +114,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="98"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.25135309394568972" green="0.61989183883911569" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.25098039215686274" green="0.61960784313725492" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

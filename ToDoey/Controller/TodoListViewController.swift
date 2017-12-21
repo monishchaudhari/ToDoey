@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
     
     var todoItems: Results<Item>?
     let realm = try! Realm()
@@ -24,12 +25,44 @@ class TodoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        navigationItem.title = selectedCategory?.name ?? "Items"
+        
         updateNoOfItems()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationItem.title = selectedCategory?.name ?? "Items"
+        
+        guard let hexColour = selectedCategory!.cellColor else{fatalError()}
+            
+        updateNavBar(withHexCode: hexColour)
+       
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
+        updateNavBar(withHexCode: "409EFF")
+        
+    }
+    
+    //MARK: - Update Navigation bar
+    
+    func updateNavBar(withHexCode colorHexCode: String) {
+        
+        guard let navBar = navigationController?.navigationBar else { fatalError("Navigation controller not Loaded")}
+        
+        guard let navBarColor = UIColor(hexString: colorHexCode) else{fatalError("")}
+        
+        navBar.barTintColor = navBarColor
+        
+        navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+        
+        navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+    }
+    
     
     //MARK - Methods for Display Rows of Table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,25 +71,25 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)  //TOdoItemCell is identifier for cutom cell group
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = todoItems?[indexPath.row] {
-            cell.textLabel?.text = item.title //set lable text of cell
+            
+            cell.textLabel?.text = item.title
+            
+            //            if let color = UIColor(hexString: selectedCategory!.cellColor!)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(todoItems!.count)) {
+            //
+            //                cell.backgroundColor = color
+            //
+            //                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            //            }
             
             cell.accessoryType = item.done == true ? .checkmark : .none //set cell checkmark useing terenary operator
-            
         } //retrive object value for [0/1/2...]
         else {
             cell.textLabel?.text = "No Item Present"
         }
         
-        //This comented code work same like upper line
-        /* ^ use terenary instead
-         if item.done == true {
-         cell.accessoryType = .checkmark
-         } else {
-         cell.accessoryType = .none
-         }*/
         return cell
     }
     
@@ -76,29 +109,6 @@ class TodoListViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            
-            if let item = todoItems?[indexPath.row] {
-                
-                do {
-                    try realm.write {
-                        realm.delete(item)
-                    }
-                } catch {
-                    
-                }
-            }
-            tableView.reloadData()
-            updateNoOfItems()
-        }
     }
     
     //MARK - Add Items to List
@@ -148,6 +158,22 @@ class TodoListViewController: UITableViewController {
         updateNoOfItems()
     }
     
+    //MARK: - Delete Row by swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = todoItems?[indexPath.row] {
+            
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                
+            }
+        }
+        updateNoOfItems()
+    }
+    
     func updateNoOfItems() {
         let numberofItemsOnPage : Int = todoItems?.count ?? 0
         if numberofItemsOnPage == 0 {
@@ -163,20 +189,20 @@ class TodoListViewController: UITableViewController {
 
 extension TodoListViewController : UISearchBarDelegate {
     
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    
-            if searchBar.text?.count == 0 {
-                loadData()
-                DispatchQueue.main.async {
-                    searchBar.resignFirstResponder()
-                }
-    
-            } else {
-    
-                todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
-                tableView.reloadData()
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text?.count == 0 {
+            loadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
             }
-  
+            
+        } else {
+            
+            todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+            tableView.reloadData()
         }
-
+        
+    }
+    
 }
